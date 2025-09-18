@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+
+{% block content %}
+  <h1>This is home page</h1>
+    {% for x in users %}
+      {% if x.username == 'spider' %}
+        <p style="background-color: blue;">{{ x.username }} - {{ x.email }}</p>
+      {% elif x.username == 'ironman' %}
+        <p style="background-color: green; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{ x.username }} - {{ x.email }}</p>
+      {% endif %}
+      {% empty %}
+      <h1>empty for </h1>
+    {% endfor %}
+   
+        <h2>end for loop</h2>
+        {% include 'components/btn.html' %}
+          {% include 'components/btn.html' %}   {% include 'components/btn.html' %}   {% include 'components/btn.html' %}
+{% endblock %}
+
+

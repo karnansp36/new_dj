@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container1{
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            box-shadow: 0 0 10px rgba(248, 248, 248, 0.1);
+            padding: 10px;
+            background-color: white;
+            border: 2px solid rgb(244, 244, 244);
+        }
+    </style>
+</head>
+<body>
+    <h1>signup</h1>
+    <div class="container1">
+    {% for x in messages %}
+        <p>{{ x }}</p>
+    {% endfor %}
+    </div>
+   
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
