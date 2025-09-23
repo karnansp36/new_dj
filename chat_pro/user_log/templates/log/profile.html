@@ -13,5 +13,7 @@
     {% endif %}
     <h1>{{ user.username }}</h1>
     <p>{{ user.email }}</p>
+
+    <a href="/api/profile_update/{{ user.id }}">Update</a>
 </body>
 </html>
