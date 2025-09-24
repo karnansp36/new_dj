@@ -2,12 +2,16 @@ from django.shortcuts import render, redirect
 from .forms import UserSignupForm
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import UserSignup
+from .models import UserSignup, MailInbox
+from django.core.mail import send_mail
+
+
 # Create your views here.
 def user_log(request):
     if request.method == "POST":
         form = UserSignupForm(request.POST, request.FILES)
         if form.is_valid():
+
             form.save()
             messages.success(request, "successfully signed up")
         else:
@@ -74,3 +78,25 @@ def explore_profile(request):
 def read_profile(request, id):
     user = UserSignup.objects.get(id = id)
     return render(request, 'log/profile.html', {'user':user} )
+
+
+
+def email_send(request):
+    if request.method == 'POST':
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        toaddress =  request.POST.get('toaddress')
+        fromaddress = request.POST.get('fromaddress')
+
+        try:
+            send_mail(subject, message, fromaddress, [toaddress], fail_silently=False)
+            MailInbox.objects.create(subject=subject, message= message, toAddress= toaddress, fromAddress= fromaddress)
+            messages.success(request, 'send mail')
+            return redirect('exlore')
+        except:
+            messages.error(request, 'error message')
+            return redirect('mail')
+    
+
+def view_email(request):
+    return render(request, 'mail.html')

@@ -7,5 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user_auth.urls')),
     path('api/', include('user_log.urls')),
+    path("gemini/", include("ai.urls")),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

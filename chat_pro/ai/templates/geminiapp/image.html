@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stable Diffusion Image Generator</title>
+</head>
+<body>
+    <h1>Stable Diffusion Image Generator</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="prompt" placeholder="Enter image prompt" size="50"><br><br>
+        <button type="submit">Generate Image</button>
+    </form>
+
+    {% if result %}
+        <h2>Result:</h2>
+        {% if result|slice:":11" == "data:image/" %}
+            <img src="{{ result }}" alt="Generated Image" width="512">
+        {% else %}
+            <p>{{ result }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
