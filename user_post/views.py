@@ -21,3 +21,7 @@ def signup(request):
 
 def login(request):
     return render(request, 'index.html')
+
+def home(request):
+    users = User_data.objects.all()
+    return render(request, 'index.html', {'users': users})
