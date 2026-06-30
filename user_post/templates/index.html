@@ -9,7 +9,9 @@
     <h1>This is login page </h1>
     {% for i in users %}
         <h2>{{ i.name }}</h2>
-        <h3>{{ i.email }}</h3>
+        <a href="/profile/delete/{{ i.id }}/">delete</a>
+       <a href="/profile/{{ i.id }}">view</a>
+       <a href="/profile/update/{{ i.id }}/">update</a>
     {% endfor %}
     
 </body>

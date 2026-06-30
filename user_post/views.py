@@ -25,3 +25,26 @@ def login(request):
 def home(request):
     users = User_data.objects.all()
     return render(request, 'index.html', {'users': users})
+
+def profile(request, id):
+    user = User_data.objects.get(id=id)
+    return render(request, 'profile.html', {'user': user})
+
+
+def profile_del(request, id):
+    user = User_data.objects.get(id=id)
+    user.delete()
+    return HttpResponse("User deleted successfully")
+
+def profile_update(request, id):
+    if request.method=="POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = User_data.objects.get(id=id)
+        user.name = username
+        user.email = email
+        user.password = password
+        user.save()
+
+    return render(request, "update.html")
