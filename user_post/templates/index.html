@@ -1,18 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+ {% block title %}
+    home page
+{% endblock %}
+
+
+{% block content %}
+
+
     <h1>This is login page </h1>
     {% for i in users %}
+        {% if role == "admin" %}
+                <h2 style="background-color: red;">{{ i.name }}</h2>
+                <a href="/profile/delete/{{ i.id }}/">delete</a>
+                <a href="/profile/{{ i.id }}">view</a>
+                <a href="/profile/update/{{ i.id }}/">update</a>
+        {% else %}
+
+      
+
         <h2>{{ i.name }}</h2>
-        <a href="/profile/delete/{{ i.id }}/">delete</a>
        <a href="/profile/{{ i.id }}">view</a>
-       <a href="/profile/update/{{ i.id }}/">update</a>
+
+           {% endif %}
     {% endfor %}
-    
-</body>
-</html>
+
+
+      {% include "btn.html" with name="click" color="red" %}
+        {% include "btn.html" with name="change" %}
+
+{% endblock %}
+

@@ -24,7 +24,7 @@ def login(request):
 
 def home(request):
     users = User_data.objects.all()
-    return render(request, 'index.html', {'users': users})
+    return render(request, 'index.html', {'users': users, 'role':"student"})
 
 def profile(request, id):
     user = User_data.objects.get(id=id)
